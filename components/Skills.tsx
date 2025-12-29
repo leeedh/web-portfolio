@@ -28,7 +28,7 @@ const Skills: React.FC = () => {
   ];
 
   return (
-    <section id="skills" className="py-12">
+    <section id="skills" className="scroll-mt-24 py-12">
       <div className="flex flex-col gap-4 mb-12">
         <h2 className="text-3xl font-bold text-white flex items-center gap-3">
           <span className="w-8 h-[2px] bg-accent"></span>

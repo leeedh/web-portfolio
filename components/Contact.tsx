@@ -5,7 +5,7 @@ import { CONTACT_INFO } from '../constants';
 
 const Contact: React.FC = () => {
   return (
-    <section id="contact" className="py-20">
+    <section id="contact" className="scroll-mt-24 py-20">
       <div className="bg-slate-800/20 border border-slate-700/50 rounded-3xl p-8 md:p-16 backdrop-blur-md relative overflow-hidden">
         {/* Background Accent */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 blur-[100px] rounded-full pointer-events-none"></div>

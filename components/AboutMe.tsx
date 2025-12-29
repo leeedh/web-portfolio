@@ -9,7 +9,7 @@ const AboutMe: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-12">
+    <section id="about" className="scroll-mt-24 py-12">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row gap-16 items-center">
           {/* Profile Image Area */}
