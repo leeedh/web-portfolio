@@ -79,6 +79,98 @@ export const PRODUCT_PROJECTS: Project[] = [
   }
 ];
 
+export const ABOUT_ME = {
+  title: "About Me",
+  content: [
+    "GIS 웹 개발자로서 공간 정보 시스템의 기술적 깊이와 사용자 경험을 동시에 추구합니다.",
+    "3D 지도 엔진 개발부터 대규모 트래픽 처리, 워크플로우 자동화까지 다양한 도메인에서 문제 해결 경험을 쌓아왔습니다.",
+    "단순히 기능을 구현하는 것을 넘어, 기술적 우아함과 실용성의 균형을 찾는 것을 중요하게 생각합니다.",
+    "최근에는 제품 개발자로서의 관점도 함께 키워가며, 기술과 비즈니스 가치를 연결하는 개발을 지향합니다."
+  ]
+};
+
+export const PERSONAL_INFO = {
+  name: "이동훈",
+  location: "Seoul, South Korea",
+  email: "donghoon.lee@example.com",
+  phone: "+82-10-0000-0000",
+  description: "3D 공간 정보 시각화부터 워크플로우 자동화까지. 기술적 깊이와 문제 해결에 대한 집요함으로 사용자 경험을 혁신하는 GIS 웹 개발자입니다. 대규모 공간 데이터 처리와 실시간 시각화에 특화되어 있으며, 복잡한 기술적 문제를 우아하게 해결하는 것을 즐깁니다.",
+  projectsCompleted: 15,
+  cvUrl: "#", // 실제 CV URL로 교체 필요
+  expertise: [
+    "GIS 데이터 처리",
+    "3D 지도 시각화",
+    "실시간 위치 서비스",
+    "공간 데이터 분석"
+  ]
+};
+
+export const SKILLS = {
+  categories: [
+    {
+      category: "Frontend",
+      items: [
+        "React",
+        "TypeScript",
+        "Next.js",
+        "Tailwind CSS",
+        "JavaScript",
+        "HTML/CSS",
+        "Redux",
+        "Zustand"
+      ],
+      color: "bg-blue-500/10 text-blue-400 border-blue-500/30"
+    },
+    {
+      category: "Geo/3D",
+      items: [
+        "CesiumJS",
+        "WebGL",
+        "Three.js",
+        "GeoServer",
+        "PostGIS",
+        "Mapbox GL JS",
+        "Leaflet",
+        "Spatial Data"
+      ],
+      color: "bg-green-500/10 text-green-400 border-green-500/30"
+    },
+    {
+      category: "Backend/DB",
+      items: [
+        "Python",
+        "Node.js",
+        "PostgreSQL",
+        "ETL Pipeline",
+        "Data Processing",
+        "API Development",
+        "RESTful API",
+        "GraphQL"
+      ],
+      color: "bg-purple-500/10 text-purple-400 border-purple-500/30"
+    },
+    {
+      category: "Infra/Etc",
+      items: [
+        "Git",
+        "Docker",
+        "AWS",
+        "CI/CD",
+        "Performance Optimization",
+        "System Design",
+        "Linux",
+        "Nginx"
+      ],
+      color: "bg-orange-500/10 text-orange-400 border-orange-500/30"
+    }
+  ],
+  stats: {
+    yearsExperience: 6,
+    projectsDelivered: 24,
+    mapBasedApps: 15
+  }
+};
+
 export const PROFILE_CONTEXT = `
 Candidate Profile:
 - Role: GIS Web Developer (React, TypeScript, Next.js, Python)

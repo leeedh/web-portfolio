@@ -1,5 +1,7 @@
 import React from 'react';
 import Hero from './components/Hero';
+import AboutMe from './components/AboutMe';
+import Skills from './components/Skills';
 import ProjectCard from './components/ProjectCard';
 import AutomationCard from './components/AutomationCard';
 import { AutomationSection } from './components/AutomationSection';
@@ -14,6 +16,12 @@ const App: React.FC = () => {
 
       <main className="max-w-6xl mx-auto px-6 py-20 space-y-32">
         
+        {/* About Me Section */}
+        <AboutMe />
+
+        {/* Skills Section */}
+        <Skills />
+
         {/* Section 1: GIS Projects */}
         <section id="gis-projects">
           <div className="flex items-center gap-4 mb-16 border-b border-slate-700 pb-4">
