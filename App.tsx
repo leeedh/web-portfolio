@@ -43,7 +43,7 @@ const App: React.FC = () => {
           </div>
           <div className="space-y-12">
             <AutomationSection />
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               {AUTOMATION_PROJECTS.map((item) => (
                 <AutomationCard key={item.id} item={item} />
               ))}

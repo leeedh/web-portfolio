@@ -48,6 +48,13 @@ export const AUTOMATION_PROJECTS: AutomationItem[] = [
     problem: '매일 반복되는 이종 시스템 간 데이터 포맷 변환 업무로 인한 개발팀 리소스 낭비',
     solution: 'Watchdog 라이브러리를 이용한 폴더 감지 및 자동 변환/DB 적재 파이프라인 개발',
     impact: '일일 단순 반복 업무 완전 제거(Zero-touch), 휴먼 에러 원천 차단'
+  },
+  {
+    id: 'auto-3',
+    title: 'GIS Data Quality Assurance System',
+    problem: '대규모 공간 데이터 검증 및 좌표계 변환 작업의 수동 처리로 인한 오류 발생 및 처리 시간 지연',
+    solution: 'PostGIS 및 Python을 활용한 자동 좌표계 검증 및 변환 스크립트, 데이터 품질 리포트 자동 생성 시스템 구축',
+    impact: '데이터 검증 시간 80% 단축 및 좌표계 오류 95% 감소, 실시간 품질 모니터링 가능'
   }
 ];
 

@@ -76,6 +76,27 @@ export function AutomationSection() {
               )}
             </div>
           </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+            {[
+              { label: "Manual Work Reduced", value: "90%" },
+              { label: "Recovery Rate", value: "98.4%" },
+              { label: "Files Processed", value: "1.2K+" },
+              { label: "Time Saved", value: "40hrs/wk" },
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                className="text-center p-4 bg-slate-800/30 rounded-lg border border-slate-700"
+              >
+                <div className="text-2xl font-bold text-yellow-500">{stat.value}</div>
+                <div className="text-sm text-slate-400 mt-1">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </motion.div>
     </section>
