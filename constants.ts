@@ -6,6 +6,15 @@ export const HERO_CONTENT = {
   description: "3D 공간 정보 시각화부터 워크플로우 자동화까지. 기술적 깊이와 문제 해결에 대한 집요함으로 사용자 경험을 혁신하는 GIS 웹 개발자입니다."
 };
 
+export const CONTACT_INFO = {
+  name: "김지아 (Zia Kim)",
+  email: "candidate@email.com",
+  linkedin: "https://linkedin.com/in/username",
+  github: "https://github.com/username",
+  location: "Seoul, South Korea",
+  resumeUrl: "#" // 실제 이력서 파일 경로
+};
+
 export const GIS_PROJECTS: Project[] = [
   {
     id: 'gis-1',

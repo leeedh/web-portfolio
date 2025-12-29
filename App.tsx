@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from './components/Hero';
 import AboutMe from './components/AboutMe';
+import Contact from './components/Contact';
 import Skills from './components/Skills';
 import ProjectCard from './components/ProjectCard';
 import AutomationCard from './components/AutomationCard';
@@ -63,6 +64,9 @@ const App: React.FC = () => {
             ))}
           </div>
         </section>
+
+        {/* Section 4: Contact */}
+        <Contact />
 
         {/* Footer */}
         <footer className="text-center py-12 border-t border-slate-800 text-slate-500">
