@@ -46,24 +46,30 @@ export const GIS_PROJECTS: Project[] = [
 export const AUTOMATION_PROJECTS: AutomationItem[] = [
   {
     id: 'auto-1',
-    title: 'Architectural Data Recovery Pipeline',
-    problem: '손상된 건축물 대장 데이터 및 도면 파일 5만 건 이상의 수기 복구 필요 (예상 소요 시간 3개월+)',
-    solution: 'Python Pandas 및 OpenCV를 활용한 데이터 전처리 및 패턴 매칭 자동화 스크립트 구축',
-    impact: '데이터 정합성 99.8% 확보 및 전체 작업 기간을 3개월에서 1주로 단축 (업무 효율 1200% 상승)'
+    title: 'Architectural Data Sync Monitoring Automation',
+    problem: '매일 전국 229개 지자체의 API 갱신 로그 파일을 수동으로 병합하고, 엑셀 필터링을 통해 미갱신 지역을 식별하는 비효율적인 모니터링 프로세스.',
+    solution: '분산된 로그 파일을 파싱하여 갱신 성공 여부를 전수 검사하고, 결과 리포트를 엑셀로 자동 생성하는 EXE 실행 파일 개발.',
+    impact: '일일 모니터링 시간 95% 단축 및 수기 취합으로 인한 누락/오기입 0건 달성',
+    iconName: 'Activity',
+    statIconName: 'Clock'
   },
   {
     id: 'auto-2',
-    title: 'Legacy CSV/Excel ETL Automation',
-    problem: '매일 반복되는 이종 시스템 간 데이터 포맷 변환 업무로 인한 개발팀 리소스 낭비',
-    solution: 'Watchdog 라이브러리를 이용한 폴더 감지 및 자동 변환/DB 적재 파이프라인 개발',
-    impact: '일일 단순 반복 업무 완전 제거(Zero-touch), 휴먼 에러 원천 차단'
+    title: 'Legacy CSV Data Transformation Tool',
+    problem: '연간 데이터 제출 시 발생하는 대규모 CSV 파일의 데이터 깨짐(지수 표기법 등) 및 포맷 불일치로 인해, 229개 파일을 일일이 수동 수정해야 하는 병목 현상.',
+    solution: '폴더 내 모든 CSV를 스캔하여 데이터 패턴 오류를 감지해 정상 수치로 변환하고, 메타데이터를 표준 규격으로 자동 보정하는 툴 배포.',
+    impact: '반복적인 수동 데이터 정비 작업 완전 자동화(Zero-touch) 및 데이터 포맷 정합성 100% 확보',
+    iconName: 'Database',
+    statIconName: 'Zap'
   },
   {
     id: 'auto-3',
-    title: 'GIS Data Quality Assurance System',
-    problem: '대규모 공간 데이터 검증 및 좌표계 변환 작업의 수동 처리로 인한 오류 발생 및 처리 시간 지연',
-    solution: 'PostGIS 및 Python을 활용한 자동 좌표계 검증 및 변환 스크립트, 데이터 품질 리포트 자동 생성 시스템 구축',
-    impact: '데이터 검증 시간 80% 단축 및 좌표계 오류 95% 감소, 실시간 품질 모니터링 가능'
+    title: 'Architectural Drawing Recovery Automation',
+    problem: '트랜잭션 실패로 인한 도면 삭제 사고 시, 대용량 로그에서 데이터를 수동 추출하고 XML 구조를 사람이 직접 변환하여 복구 시간이 길고 오류 위험이 높음.',
+    solution: '로그 파일에서 삭제된 도면 객체(Entity)를 자동 추출하고, 스키마가 다른 XML 태그와 속성을 복구용 포맷으로 자동 매핑하는 시스템 구축.',
+    impact: '복잡한 XML 구조 분석 시간 제거로 복구 대응 속도 획기적 개선 및 휴먼 에러 원천 차단',
+    iconName: 'ShieldCheck',
+    statIconName: 'Timer'
   }
 ];
 

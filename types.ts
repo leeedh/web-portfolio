@@ -15,6 +15,8 @@ export interface AutomationItem {
   problem: string;
   solution: string;
   impact: string;
+  iconName: string; // lucide-react icon name for the card header
+  statIconName: string; // lucide-react icon name for the stat box
 }
 
 export interface ChatMessage {

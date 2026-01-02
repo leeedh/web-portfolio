@@ -1,17 +1,43 @@
 import React from 'react';
 import { AutomationItem } from '../types';
-import { Terminal, ArrowRight, Timer } from 'lucide-react';
+import { 
+  ArrowRight, 
+  Activity, 
+  Database, 
+  ShieldCheck, 
+  Clock, 
+  Zap, 
+  Timer
+} from 'lucide-react';
+import type { LucideProps } from 'lucide-react';
 
 interface AutomationCardProps {
   item: AutomationItem;
 }
 
+// Icon mapping for card header icons
+const iconMap: Record<string, React.ComponentType<LucideProps>> = {
+  Activity,
+  Database,
+  ShieldCheck,
+};
+
+// Icon mapping for stat box icons
+const statIconMap: Record<string, React.ComponentType<LucideProps>> = {
+  Clock,
+  Zap,
+  Timer,
+};
+
 const AutomationCard: React.FC<AutomationCardProps> = ({ item }) => {
+  const HeaderIcon = iconMap[item.iconName] || Activity;
+  const StatIcon = statIconMap[item.statIconName] || Timer;
+
   return (
     <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 md:p-5 hover:bg-slate-800 transition-colors duration-300 h-full flex flex-col">
       <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
         <div className="p-2 md:p-3 bg-slate-900 rounded-lg text-yellow-500 border border-slate-700 flex-shrink-0">
-            <Terminal size={20} className="md:w-6 md:h-6" />
+            <HeaderIcon size={20} className="md:w-6 md:h-6" />
         </div>
         <h3 className="text-base md:text-lg lg:text-xl font-bold text-white leading-tight">{item.title}</h3>
       </div>
@@ -35,7 +61,7 @@ const AutomationCard: React.FC<AutomationCardProps> = ({ item }) => {
                 <span className="text-xs uppercase tracking-wider text-green-400 font-bold block mb-1">Solution & Impact</span>
                 <p className="text-slate-300 text-xs md:text-sm leading-relaxed mb-2 md:mb-3">{item.solution}</p>
                 <div className="mt-2 flex items-center gap-2 text-accent text-xs md:text-sm font-semibold bg-accent/10 px-2 md:px-3 py-1.5 md:py-2 rounded">
-                    <Timer size={14} className="md:w-4 md:h-4 flex-shrink-0" />
+                    <StatIcon size={14} className="md:w-4 md:h-4 flex-shrink-0" />
                     <span className="leading-tight">{item.impact}</span>
                 </div>
             </div>
