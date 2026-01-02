@@ -22,7 +22,7 @@ export const Hero: React.FC = () => {
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-textMain tracking-tight mb-2 md:mb-3 leading-[1.1]">
             <span className="block">
               <span className="text-textMuted text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium" style={{ color: 'rgba(126, 196, 187, 1)' }}>직관과 효율을 설계하는 개발자</span>
-              <br className="hidden sm:block"/>
+              <br />
               <span className="gradient-text">이동훈입니다.</span>
             </span>
             <span className="text-textMuted text-2xl sm:text-3xl md:text-4xl lg:text-5xl block mt-2 md:mt-3">{HERO_CONTENT.subtitle}</span>
