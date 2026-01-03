@@ -2,8 +2,8 @@ import { Project, AutomationItem } from './types';
 
 export const HERO_CONTENT = {
   title: "직관과 효율을 설계하는 개발자 이동훈입니다.",
-  subtitle: "GIS Engineering & Full-stack Solution Provider",
-  description: "3D 공간 정보 시각화부터 워크플로우 자동화까지. 기술적 깊이와 문제 해결에 대한 집요함으로 사용자 경험을 혁신하는 GIS 웹 개발자입니다."
+  subtitle: "High-Performance Web Engineering for Complex Data",
+  description: "3D 공간 정보 시각화부터 워크플로우 자동화까지. 기술적 깊이와 문제 해결 능력으로 사용자 경험을 혁신하는 웹 개발자입니다."
 };
 
 export const CONTACT_INFO = {
@@ -55,21 +55,21 @@ export const AUTOMATION_PROJECTS: AutomationItem[] = [
   },
   {
     id: 'auto-2',
-    title: 'Legacy CSV Data Transformation Tool',
-    problem: '연간 데이터 제출 시 발생하는 대규모 CSV 파일의 데이터 깨짐(지수 표기법 등) 및 포맷 불일치로 인해, 229개 파일을 일일이 수동 수정해야 하는 병목 현상.',
-    solution: '폴더 내 모든 CSV를 스캔하여 데이터 패턴 오류를 감지해 정상 수치로 변환하고, 메타데이터를 표준 규격으로 자동 보정하는 툴 배포.',
-    impact: '반복적인 수동 데이터 정비 작업 완전 자동화(Zero-touch) 및 데이터 포맷 정합성 100% 확보',
-    iconName: 'Database',
-    statIconName: 'Zap'
-  },
-  {
-    id: 'auto-3',
     title: 'Architectural Drawing Recovery Automation',
     problem: '트랜잭션 실패로 인한 도면 삭제 사고 시, 대용량 로그에서 데이터를 수동 추출하고 XML 구조를 사람이 직접 변환하여 복구 시간이 길고 오류 위험이 높음.',
     solution: '로그 파일에서 삭제된 도면 객체(Entity)를 자동 추출하고, 스키마가 다른 XML 태그와 속성을 복구용 포맷으로 자동 매핑하는 시스템 구축.',
     impact: '복잡한 XML 구조 분석 시간 제거로 복구 대응 속도 획기적 개선 및 휴먼 에러 원천 차단',
     iconName: 'ShieldCheck',
     statIconName: 'Timer'
+  },
+  {
+    id: 'auto-3',
+    title: 'Legacy CSV Data Transformation Tool',
+    problem: '연간 데이터 제출 시 발생하는 대규모 CSV 파일의 데이터 깨짐(지수 표기법 등) 및 포맷 불일치로 인해, 229개 파일을 일일이 수동 수정해야 하는 병목 현상.',
+    solution: '폴더 내 모든 CSV를 스캔하여 데이터 패턴 오류를 감지해 정상 수치로 변환하고, 메타데이터를 표준 규격으로 자동 보정하는 툴 배포.',
+    impact: '반복적인 수동 데이터 정비 작업 완전 자동화(Zero-touch) 및 데이터 포맷 정합성 100% 확보',
+    iconName: 'Database',
+    statIconName: 'Zap'
   }
 ];
 

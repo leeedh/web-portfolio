@@ -13,15 +13,15 @@ export const Hero: React.FC = () => {
       <div className="absolute top-0 right-0 w-1/2 md:w-1/3 h-full bg-gradient-to-l from-primary to-transparent opacity-80" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-24 relative z-10 w-full">
-        <div className="max-w-3xl">
+        <div className="max-w-4xl">
           <div className="inline-flex items-center space-x-2 bg-accent/10 border border-accent/30 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full mb-6 md:mb-8">
             <Map className="w-3.5 h-3.5 md:w-4 md:h-4 text-accent" />
-            <span className="text-xs md:text-sm font-medium text-accent">GIS & Spatial Systems Engineer</span>
+            <span className="text-xs md:text-sm font-medium text-accent">Web Performance & Data Visualization</span>
           </div>
           
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-textMain tracking-tight mb-2 md:mb-3 leading-[1.1]">
             <span className="block">
-              <span className="text-textMuted text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium" style={{ color: 'rgba(126, 196, 187, 1)' }}>직관과 효율을 설계하는 개발자</span>
+              <span className="text-textMuted text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium" style={{ color: 'rgba(126, 196, 187, 1)' }}>직관과 효율을 설계합니다.</span>
               <br />
               <span className="gradient-text">이동훈입니다.</span>
             </span>

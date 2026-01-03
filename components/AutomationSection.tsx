@@ -3,13 +3,13 @@ import { useRef, useState, useEffect } from "react"
 import { Terminal } from "lucide-react"
 
 const terminalLines = [
-  "$ python data_automation.py --mode=recover",
-  "> Initializing XML recovery pipeline...",
-  "> Scanning corrupted files: 1,247 files found",
-  "> Processing batch 1/5...",
-  "> Recovery rate: 98.4%",
-  "> Manual work reduced by 90%",
-  "✓ Automation complete",
+  "$ python automation_pipeline.py --mode=monitor",
+  "> Initializing data sync monitoring...",
+  "> Processing 229 local government files...",
+  "> CSV sanitization: 229 files processed",
+  "> XML recovery pipeline: Active",
+  "> Manual work reduced by 95%",
+  "✓ All automations running",
 ]
 
 export function AutomationSection() {
@@ -80,10 +80,10 @@ export function AutomationSection() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
             {[
-              { label: "Manual Work Reduced", value: "90%" },
-              { label: "Recovery Rate", value: "98.4%" },
-              { label: "Files Processed", value: "1.2K+" },
-              { label: "Time Saved", value: "40hrs/wk" },
+              { label: "Manual Work Reduced", value: "95%" },
+              { label: "Data Accuracy", value: "95%" },
+              { label: "Time Saved", value: "30hrs/wk" },
+              { label: "Local Governments Covered", value: "229" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

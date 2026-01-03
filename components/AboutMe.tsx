@@ -3,9 +3,9 @@ import { User, Award, Target, Zap } from 'lucide-react';
 
 const AboutMe: React.FC = () => {
   const stats = [
-    { label: "Experience", value: "5+ Years", icon: <Award className="text-accent" size={18} /> },
-    { label: "Projects", value: "15+ Delivered", icon: <Target className="text-accent" size={18} /> },
-    { label: "Efficiency Boost", value: "1200% Avg.", icon: <Zap className="text-accent" size={18} /> },
+    { label: "Experience", value: "4+ Years", icon: <Award className="text-accent" size={18} /> },
+    { label: "Projects", value: "15+", icon: <Target className="text-accent" size={18} /> },
+    { label: "Efficiency Boost", value: "1200%.", icon: <Zap className="text-accent" size={18} /> },
   ];
 
   return (
@@ -35,28 +35,24 @@ const AboutMe: React.FC = () => {
           <div className="w-full md:w-3/5 space-y-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase tracking-widest">
               <User size={14} />
-              Who I Am
+              Engineering Philosophy
             </div>
             
             <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold text-textMain leading-tight">
-                데이터의 <span className="text-accent">공간적 가치</span>를 <br />
-                코드로 실현하는 개발자입니다.
+              <h2 className="text-4xl md:text-4xl font-bold text-textMain leading-tight">
+                <span className="text-accent">게으르기 위해</span>,<br /> 누구보다 <span className="text-accent">부지런히</span> 코딩합니다.
               </h2>
               <p className="text-textMuted text-lg leading-relaxed">
-                복잡하게 얽힌 공간 정보와 대규모 데이터를 다루는 것에 익숙합니다. 
-                단순한 시각화를 넘어, 사용자가 데이터를 통해 실질적인 인사이트를 얻을 수 있도록 
-                엔지니어링적 최적화와 직관적인 UX를 설계하는 데 집중합니다.
+                "위대한 프로그래머의 3대 미덕은 나태, 성급함, 오만이다." 펄(Perl)의 창시자 래리 월의 이 말을 가장 좋아합니다. 저는 단순 반복 작업이 시간을 뺏는 것을 견디지 못합니다. 30분이 걸리는 수작업을 3초 만에 끝내기 위해서라면, 밤을 새워 자동화 스크립트를 짜는 것을 마다하지 않는 '부지런한 게으름뱅이'입니다.
               </p>
               <p className="text-textMuted text-lg leading-relaxed">
-                3D 디지털 트윈부터 업무 프로세스 자동화 파이프라인까지, 
-                문제가 있는 곳에 기술적 해결책을 제시하며 비즈니스 효율을 극대화하는 것이 저의 핵심 역량입니다.
+                저의 효율 추구는 단순히 코드를 넘어 서비스의 품질로 확장됩니다. 사용자가 마주하는 화면 뒤편의 복잡한 문제들을 기술적으로 해결하고, 가장 직관적인 결과물만을 화면에 그려내는 것에 집중합니다. 극한의 데이터 환경에서 단련된 최적화 감각으로, 어떠한 웹 서비스에서도 안정적이고 민첩한 퍼포먼스를 만들어냅니다.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
               {stats.map((stat, i) => (
-                <div key={i} className="bg-slate-800/40 border border-slate-700/50 p-5 rounded-xl flex flex-col gap-3 hover:border-accent/30 transition-colors">
+                <div key={i} className="bg-slate-800/40 border border-slate-700/50 p-5 rounded-xl flex flex-row gap-3 items-center hover:border-accent/30 transition-colors">
                   <div className="p-2 w-fit bg-slate-900 rounded-lg shadow-inner">{stat.icon}</div>
                   <div>
                     <div className="text-xs text-slate-500 uppercase font-semibold tracking-wider">{stat.label}</div>
