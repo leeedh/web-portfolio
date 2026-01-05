@@ -8,8 +8,8 @@ export const HERO_CONTENT = {
 };
 
 export const CONTACT_INFO = {
-  name: "김지아 (Zia Kim)",
-  email: "candidate@email.com",
+  name: "이동훈 (Donghoon Lee)",
+  email: "ldhl4468@gmail.com",
   linkedin: "https://linkedin.com/in/username",
   github: "https://github.com/username",
   location: "Seoul, South Korea",
@@ -98,7 +98,7 @@ export const PRODUCT_PROJECTS: Project[] = [
       "Solution: 실시간 일정 공유 및 충돌 감지 알고리즘 구현, 역할별 권한 관리 시스템 도입.",
       "Real-world Impact: 실제 극단 2곳에서 도입하여 조연출의 행정 업무 시간 70% 단축 및 스케줄 확정 프로세스 자동화.",
     ],
-    image: "https://picsum.photos/800/451?grayscale",
+    image: 'public/image/scheduler.png'
   },
   {
     id: "prod-2",
