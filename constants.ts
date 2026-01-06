@@ -43,7 +43,7 @@ export const GIS_PROJECTS: Project[] = [
       "Solution: 불필요한 리렌더링 제거(Memoization) 및 대용량 테이블 가상화(Virtualization) 적용, 조회 API 캐싱 전략 수립.",
       "Impact: 동시 접속자 10만 명 트래픽 상황에서도 UI 응답성 유지, 사용자 민원 접수 건수 30% 감소.",
     ],
-    image: "public/image/lotto.png",
+    image: "/image/lotto.png",
   },
 ];
 
@@ -99,7 +99,7 @@ export const PRODUCT_PROJECTS: Project[] = [
       "Solution: 실시간 일정 공유 및 충돌 감지 알고리즘 구현, 역할별 권한 관리 시스템 도입.",
       "Real-world Impact: 실제 극단 2곳에서 도입하여 조연출의 행정 업무 시간 70% 단축 및 스케줄 확정 프로세스 자동화.",
     ],
-    image: 'public/image/scheduler.png'
+    image: '/image/scheduler.png'
   },
   {
     id: "prod-2",
@@ -113,7 +113,7 @@ export const PRODUCT_PROJECTS: Project[] = [
       "Solution: SVG 기반의 반응형 좌석 맵과 시야각 시뮬레이션 기능 구현.",
       'Real-world Impact: 아마추어 극단 티켓 예매 페이지에 연동, 관객 만족도 조사에서 "예매 편의성" 항목 점수 대폭 상승.',
     ],
-    image: "public/image/seatchk.png",
+    image: "/image/seatchk.png",
   },
 ];
 
