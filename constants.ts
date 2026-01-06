@@ -43,6 +43,7 @@ export const GIS_PROJECTS: Project[] = [
       "Solution: 불필요한 리렌더링 제거(Memoization) 및 대용량 테이블 가상화(Virtualization) 적용, 조회 API 캐싱 전략 수립.",
       "Impact: 동시 접속자 10만 명 트래픽 상황에서도 UI 응답성 유지, 사용자 민원 접수 건수 30% 감소.",
     ],
+    image: "public/image/lotto.png",
   },
 ];
 
