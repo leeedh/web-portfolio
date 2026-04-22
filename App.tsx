@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar';
+import SectionDotNav from './components/SectionDotNav';
 import Hero from './components/Hero';
 import AboutMe from './components/AboutMe';
 import Contact from './components/Contact';
@@ -11,33 +12,22 @@ import GeminiChat from './components/GeminiChat';
 
 const App: React.FC = () => {
   return (
-    <div className="bg-primary min-h-screen text-textMain selection:bg-accent selection:text-slate-900">
+    <div className="bg-ln-bg min-h-screen text-ln-text">
       <Navbar />
+      <SectionDotNav />
       <Hero />
 
-      <main className="max-w-6xl mx-auto px-6 py-20 space-y-32">
-        {/* About Me Section */}
+      <main className="max-w-5xl mx-auto px-6 py-24 space-y-36">
         <AboutMe />
-
-        {/* Skills Section */}
-        <Skills />
-
-        {/* GIS Projects Section */}
         <GISProjects />
-
-        {/* Automation Section */}
-        <Automation />
-
-        {/* Products Section */}
         <Products />
-
-        {/* Contact Section */}
+        <Skills />
+        <Automation />
         <Contact />
 
-        {/* Footer */}
-        <footer className="text-center py-12 border-t border-slate-800 text-slate-500">
-          <p>© {new Date().getFullYear()} GIS Developer Portfolio. All rights reserved.</p>
-          <p className="text-sm mt-2">Built with React, Tailwind & Gemini API</p>
+        <footer className="text-center py-12 text-ln-muted" style={{ borderTop: '1px solid var(--ln-border)' }}>
+          <p className="text-sm">© {new Date().getFullYear()} LDH.dev — GIS & Web Engineer Portfolio</p>
+          <p className="text-xs mt-1.5">Built with React, Tailwind & Gemini API</p>
         </footer>
       </main>
 

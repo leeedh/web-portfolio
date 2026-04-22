@@ -1,56 +1,140 @@
 import React from 'react';
 import { HERO_CONTENT } from '../constants';
-import { Map, ChevronDown } from 'lucide-react';
+import { ChevronDown, ArrowRight } from 'lucide-react';
+import { useMotionValue, useSpring, motion, useReducedMotion } from 'framer-motion';
 
 export const Hero: React.FC = () => {
+  const prefersReducedMotion = useReducedMotion();
+  const mouseX = useMotionValue(-300);
+  const mouseY = useMotionValue(-200);
+  const springX = useSpring(mouseX, { stiffness: 60, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 60, damping: 20 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (prefersReducedMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left - 300);
+    mouseY.set(e.clientY - rect.top - 300);
+  };
+
   return (
-    <div className="relative min-h-screen flex items-center bg-primary overflow-hidden py-12 md:py-0">
-      {/* Abstract Background Elements */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 md:w-64 md:h-64 bg-accent blur-[60px] md:blur-[100px] rounded-full mix-blend-screen"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 md:w-96 md:h-96 bg-blue-600 blur-[80px] md:blur-[120px] rounded-full mix-blend-screen"></div>
-      </div>
-      <div className="absolute top-0 right-0 w-1/2 md:w-1/3 h-full bg-gradient-to-l from-primary to-transparent opacity-80" />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-24 relative z-10 w-full">
-        <div className="max-w-4xl">
-          <div className="inline-flex items-center space-x-2 bg-accent/10 border border-accent/30 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full mb-6 md:mb-8">
-            <Map className="w-3.5 h-3.5 md:w-4 md:h-4 text-accent" />
-            <span className="text-xs md:text-sm font-medium text-accent">Web Performance & Data Visualization</span>
-          </div>
-          
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-textMain tracking-tight mb-2 md:mb-3 leading-[1.1]">
-            <span className="block">
-              <span className="text-textMuted text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium" style={{ color: 'rgba(126, 196, 187, 1)' }}>직관과 효율을 설계합니다.</span>
-              <br />
-              <span className="gradient-text">이동훈입니다.</span>
-            </span>
-            <span className="text-textMuted text-2xl sm:text-3xl md:text-4xl lg:text-5xl block mt-2 md:mt-3">{HERO_CONTENT.subtitle}</span>
-          </h1>
-          
-          <p className="text-base sm:text-lg md:text-xl text-textMuted mb-8 md:mb-12 max-w-2xl leading-relaxed">
-            {HERO_CONTENT.description}
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-            <a 
-              href="#gis-projects" 
-              className="inline-flex justify-center items-center px-6 py-3 md:px-8 md:py-4 bg-accent text-slate-900 text-sm md:text-base font-medium rounded-lg hover:bg-accent/90 transition-all hover:shadow-lg hover:shadow-accent/20"
-            >
-              View Case Studies
-            </a>
-            <a 
-              href="#contact" 
-              className="inline-flex justify-center items-center px-6 py-3 md:px-8 md:py-4 bg-slate-800 text-textMain border border-slate-700 text-sm md:text-base font-medium rounded-lg hover:bg-slate-700 transition-all"
-            >
-              Contact Me
-            </a>
-          </div>
+    <div
+      className="relative min-h-screen flex items-center overflow-hidden"
+      style={{ background: 'var(--ln-bg)' }}
+      onMouseMove={handleMouseMove}
+    >
+      {/* Dot grid */}
+      <div className="absolute inset-0 ln-dot-bg pointer-events-none" style={{ opacity: 0.4 }} />
+
+      {/* Accent glow — follows cursor */}
+      <motion.div
+        className="absolute pointer-events-none"
+        style={{
+          x: springX,
+          y: springY,
+          width: 600,
+          height: 600,
+          background: 'radial-gradient(circle at center, rgba(94,106,210,0.12) 0%, transparent 70%)',
+        }}
+      />
+
+      {/* Bottom fade */}
+      <div
+        className="absolute bottom-0 left-0 w-full pointer-events-none"
+        style={{ height: 200, background: 'linear-gradient(to bottom, transparent, var(--ln-bg))' }}
+      />
+
+      <div className="relative z-10 max-w-5xl mx-auto px-6 w-full py-32 md:py-0">
+        {/* Badge */}
+        <div className="animate-ln-fade-up" style={{ marginBottom: 32 }}>
+          <span className="ln-section-label">GIS & Web Performance Engineering</span>
         </div>
+
+        {/* Headline */}
+        <div className="animate-ln-fade-up delay-1">
+          <h1
+            style={{
+              fontSize: 'clamp(36px, 6vw, 68px)',
+              fontWeight: 700,
+              letterSpacing: '-0.04em',
+              lineHeight: 1.08,
+              color: 'var(--ln-text)',
+              marginBottom: 16,
+            }}
+          >
+            <span
+              style={{
+                display: 'block',
+                color: 'var(--ln-sub)',
+                fontSize: 'clamp(20px, 3vw, 36px)',
+                fontWeight: 500,
+                letterSpacing: '-0.03em',
+                marginBottom: 8,
+              }}
+            >
+              이동훈,
+            </span>
+            <span className="ln-gradient-text">GIS & Web Engineer</span>
+          </h1>
+          <p
+            style={{
+              fontSize: 'clamp(16px, 1.8vw, 20px)',
+              fontWeight: 500,
+              color: 'var(--ln-sub)',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.4,
+              marginBottom: 8,
+            }}
+          >
+            직관과 효율을 설계합니다.
+          </p>
+          <p
+            style={{
+              fontSize: 'clamp(14px, 1.4vw, 17px)',
+              fontWeight: 400,
+              color: 'var(--ln-muted)',
+              letterSpacing: '-0.01em',
+              lineHeight: 1.5,
+            }}
+          >
+            {HERO_CONTENT.subtitle}
+          </p>
+        </div>
+
+        {/* Description */}
+        <p
+          className="animate-ln-fade-up delay-2"
+          style={{
+            fontSize: 15,
+            color: 'var(--ln-sub)',
+            lineHeight: 1.7,
+            maxWidth: 560,
+            marginTop: 24,
+            marginBottom: 40,
+          }}
+        >
+          {HERO_CONTENT.description}
+        </p>
+
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row gap-3 animate-ln-fade-up delay-3">
+          <a href="#gis-projects" className="ln-btn-primary">
+            View Case Studies
+            <ArrowRight size={15} />
+          </a>
+          <a href="#contact" className="ln-btn-ghost">
+            Contact Me
+          </a>
+        </div>
+
       </div>
 
-      <div className="absolute bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-textMuted">
-        <ChevronDown className="w-5 h-5 md:w-6 md:h-6" />
+      {/* Scroll indicator */}
+      <div
+        className="absolute animate-bounce"
+        style={{ bottom: 32, left: '50%', transform: 'translateX(-50%)', color: 'var(--ln-muted)' }}
+      >
+        <ChevronDown size={20} />
       </div>
     </div>
   );

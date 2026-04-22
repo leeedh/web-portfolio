@@ -11,49 +11,243 @@
         theme: {
           extend: {
             colors: {
-              primary: '#0f172a', // slate-900
-              secondary: '#1e293b', // slate-800
-              accent: '#14b8a6', // teal-500
-              textMain: '#f8fafc', // slate-50
-              textMuted: '#94a3b8', // slate-400
+              'ln-bg':        '#111113',
+              'ln-surface':   '#1a1a1f',
+              'ln-surface2':  '#222228',
+              'ln-text':      '#f0f0f0',
+              'ln-sub':       '#8a8a8a',
+              'ln-muted':     '#767680',
+              'ln-accent':    '#5e6ad2',
+              /* legacy aliases */
+              primary:   '#111113',
+              secondary: '#1a1a1f',
+              accent:    '#5e6ad2',
+              textMain:  '#f0f0f0',
+              textMuted: '#8a8a8a',
             },
             fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            }
+              sans: ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
+              mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'],
+            },
+            borderRadius: {
+              'ln':    '8px',
+              'ln-lg': '12px',
+              'ln-xl': '16px',
+            },
           }
         }
       }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
     <style>
+      :root {
+        --ln-bg:          #111113;
+        --ln-surface:     #1a1a1f;
+        --ln-surface2:    #222228;
+        --ln-border:      rgba(255,255,255,0.08);
+        --ln-border-md:   rgba(255,255,255,0.12);
+        --ln-text:        #f0f0f0;
+        --ln-sub:         #8a8a8a;
+        --ln-muted:       #767680;
+        --ln-accent:      #5e6ad2;
+        --ln-accent-dim:  rgba(94,106,210,0.15);
+        --ln-accent-md:   rgba(94,106,210,0.30);
+        --ln-radius:      8px;
+        --ln-radius-lg:   12px;
+        --ln-radius-xl:   16px;
+        --ln-ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        --ln-fast:        150ms;
+        --ln-mid:         200ms;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
       body {
-        background-color: #0f172a;
-        color: #f8fafc;
-        font-family: 'Inter', sans-serif;
+        background-color: var(--ln-bg);
+        color: var(--ln-text);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0f172a;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #334155;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #475569;
-      }
-      .gradient-text {
-        background-image: linear-gradient(90deg, rgba(20, 184, 166, 1) 0%, rgba(0, 255, 221, 1) 100%);
+
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: var(--ln-bg); }
+      ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.20); }
+
+      ::selection { background: var(--ln-accent-md); color: var(--ln-text); }
+
+      .ln-gradient-text {
+        background: linear-gradient(135deg, #f0f0f0 0%, #8a8a8a 100%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
         -webkit-text-fill-color: transparent;
-        line-height: 45px;
+      }
+
+      /* kept for backward compat */
+      .gradient-text {
+        background: linear-gradient(135deg, #f0f0f0 0%, #8a8a8a 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.1;
+      }
+
+      .ln-section-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ln-accent);
+        padding: 4px 10px;
+        background: var(--ln-accent-dim);
+        border: 1px solid rgba(94,106,210,0.25);
+        border-radius: 100px;
+      }
+
+      .ln-card {
+        background: var(--ln-surface);
+        border: 1px solid var(--ln-border);
+        border-radius: var(--ln-radius-lg);
+        transition: border-color var(--ln-mid) var(--ln-ease),
+                    background var(--ln-mid) var(--ln-ease);
+      }
+      .ln-card:hover {
+        border-color: var(--ln-border-md);
+        background: var(--ln-surface2);
+      }
+
+      .ln-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 10px;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--ln-sub);
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--ln-border);
+        border-radius: 100px;
+        transition: border-color var(--ln-fast) var(--ln-ease),
+                    color var(--ln-fast) var(--ln-ease);
+      }
+      .ln-tag:hover { border-color: var(--ln-border-md); color: var(--ln-text); }
+
+      .ln-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        background: var(--ln-accent);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: var(--ln-radius);
+        transition: all var(--ln-fast) var(--ln-ease);
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .ln-btn-primary:hover { background: #6e7ae0; transform: translateY(-1px); }
+      .ln-btn-primary:active { transform: translateY(0); }
+
+      .ln-btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--ln-sub);
+        background: transparent;
+        border: 1px solid var(--ln-border);
+        border-radius: var(--ln-radius);
+        transition: all var(--ln-fast) var(--ln-ease);
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .ln-btn-ghost:hover {
+        color: var(--ln-text);
+        border-color: var(--ln-border-md);
+        background: rgba(255,255,255,0.04);
+      }
+
+      .ln-dot-bg {
+        background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+        background-size: 28px 28px;
+      }
+
+      @keyframes ln-fade-up {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes ln-fade-in {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+      @keyframes ln-cursor-blink {
+        0%, 100% { opacity: 1; }
+        50%       { opacity: 0; }
+      }
+
+      .animate-ln-fade-up { animation: ln-fade-up 0.4s var(--ln-ease) both; }
+      .animate-ln-fade-in { animation: ln-fade-in 0.3s var(--ln-ease) both; }
+      .animate-ln-cursor  { animation: ln-cursor-blink 1s step-end infinite; }
+
+      .delay-1 { animation-delay: 0.1s; }
+      .delay-2 { animation-delay: 0.2s; }
+      .delay-3 { animation-delay: 0.3s; }
+      .delay-4 { animation-delay: 0.4s; }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--ln-accent);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      /* Navbar link hover — CSS transition 기반 */
+      .ln-nav-link {
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 6px;
+        color: var(--ln-sub);
+        background: transparent;
+        transition: color 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    background 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        text-decoration: none;
+        display: inline-block;
+      }
+      .ln-nav-link:hover {
+        color: var(--ln-text);
+        background: rgba(255,255,255,0.04);
+      }
+      .ln-nav-link[data-active="true"] {
+        color: var(--ln-text);
+        background: rgba(255,255,255,0.06);
       }
     </style>
+
   <script type="importmap">
 {
   "imports": {

@@ -1,89 +1,227 @@
-
 import React from 'react';
-import { Mail, Github, Linkedin, FileText, Send, MapPin } from 'lucide-react';
+import { Mail, Github, Linkedin, FileText, Download, MapPin } from 'lucide-react';
 import { CONTACT_INFO } from '../constants';
 
 const Contact: React.FC = () => {
   return (
-    <section id="contact" className="scroll-mt-24 py-20">
-      <div className="bg-slate-800/20 border border-slate-700/50 rounded-3xl p-8 md:p-16 backdrop-blur-md relative overflow-hidden">
-        {/* Background Accent */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 blur-[100px] rounded-full pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+    <section id="contact" className="scroll-mt-24">
+      <div
+        style={{
+          background: 'var(--ln-surface)',
+          border: '1px solid var(--ln-border)',
+          borderRadius: 'var(--ln-radius-xl)',
+          padding: 'clamp(32px, 5vw, 64px)',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Accent glow */}
+        <div
+          style={{
+            position: 'absolute',
+            top: -80,
+            right: -80,
+            width: 320,
+            height: 320,
+            background: 'radial-gradient(circle, rgba(94,106,210,0.08) 0%, transparent 70%)',
+            pointerEvents: 'none',
+          }}
+        />
 
-        <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-                Get In <span className="text-accent">Touch</span>
+        <div className="grid md:grid-cols-2 gap-12 items-start" style={{ position: 'relative', zIndex: 1 }}>
+          {/* Left */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <div>
+              <span className="ln-section-label" style={{ marginBottom: 12, display: 'inline-flex' }}>
+                Contact
+              </span>
+              <h2
+                style={{
+                  fontSize: 'clamp(28px, 4vw, 40px)',
+                  fontWeight: 700,
+                  letterSpacing: '-0.04em',
+                  color: 'var(--ln-text)',
+                  marginTop: 12,
+                  lineHeight: 1.15,
+                }}
+              >
+                Get In{' '}
+                <span
+                  style={{
+                    background: 'linear-gradient(135deg, #7b87e8 0%, #5e6ad2 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  }}
+                >
+                  Touch
+                </span>
               </h2>
-              <p className="text-slate-400 text-lg max-w-md">
-                협업 제안, 기술적인 교류, 혹은 저에 대해 궁금한 점이 있다면 언제든 환영합니다. 
-                함께 새로운 가치를 만들어갈 준비가 되어 있습니다.
+              <p style={{ fontSize: 14, color: 'var(--ln-sub)', lineHeight: 1.75, maxWidth: 380, marginTop: 12 }}>
+                협업 제안, 기술적인 교류, 혹은 저에 대해 궁금한 점이 있다면 언제든 환영합니다.
               </p>
             </div>
 
-            <div className="space-y-4">
-              <div className="flex items-center gap-4 text-slate-300">
-                <div className="p-3 bg-slate-900 rounded-xl border border-slate-700">
-                  <Mail size={20} className="text-accent" />
+            {/* Contact items */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {[
+                { icon: <Mail size={16} />, label: 'Email', value: CONTACT_INFO.email, href: `mailto:${CONTACT_INFO.email}` },
+                { icon: <MapPin size={16} />, label: 'Location', value: CONTACT_INFO.location, href: undefined },
+              ].map((item) => (
+                <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: 9,
+                      background: 'var(--ln-accent-dim)',
+                      border: '1px solid rgba(94,106,210,0.2)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'var(--ln-accent)',
+                      flexShrink: 0,
+                    }}
+                  >
+                    {item.icon}
+                  </div>
+                  <div>
+                    <div
+                      style={{
+                        fontSize: 11,
+                        color: 'var(--ln-muted)',
+                        fontWeight: 600,
+                        letterSpacing: '0.06em',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      {item.label}
+                    </div>
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        style={{
+                          fontSize: 14,
+                          fontWeight: 500,
+                          color: 'var(--ln-text)',
+                          textDecoration: 'none',
+                          transition: 'color 150ms',
+                        }}
+                        onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = 'var(--ln-accent)')}
+                        onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = 'var(--ln-text)')}
+                      >
+                        {item.value}
+                      </a>
+                    ) : (
+                      <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--ln-text)' }}>{item.value}</span>
+                    )}
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Email</p>
-                  <a href={`mailto:${CONTACT_INFO.email}`} className="text-lg hover:text-accent transition-colors font-semibold">
-                    {CONTACT_INFO.email}
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 text-slate-300">
-                <div className="p-3 bg-slate-900 rounded-xl border border-slate-700">
-                  <MapPin size={20} className="text-accent" />
-                </div>
-                <div>
-                  <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Location</p>
-                  <p className="text-lg font-semibold">{CONTACT_INFO.location}</p>
-                </div>
-              </div>
+              ))}
             </div>
 
-            <div className="flex gap-4">
-              <a 
-                href={CONTACT_INFO.github} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-4 bg-slate-900 rounded-2xl border border-slate-700 hover:border-accent/50 hover:bg-slate-800 transition-all text-slate-400 hover:text-accent"
-              >
-                <Github size={24} />
-              </a>
-              <a 
-                href={CONTACT_INFO.linkedin} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-4 bg-slate-900 rounded-2xl border border-slate-700 hover:border-accent/50 hover:bg-slate-800 transition-all text-slate-400 hover:text-accent"
-              >
-                <Linkedin size={24} />
-              </a>
+            {/* Social links */}
+            <div style={{ display: 'flex', gap: 8 }}>
+              {[
+                { icon: <Github size={18} />, href: CONTACT_INFO.github, label: 'GitHub' },
+                { icon: <Linkedin size={18} />, href: CONTACT_INFO.linkedin, label: 'LinkedIn' },
+              ].map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 10,
+                    background: 'rgba(255,255,255,0.03)',
+                    border: '1px solid var(--ln-border)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'var(--ln-sub)',
+                    transition: 'all 150ms',
+                    textDecoration: 'none',
+                  }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.borderColor = 'var(--ln-border-md)';
+                    el.style.color = 'var(--ln-text)';
+                    el.style.background = 'rgba(255,255,255,0.06)';
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.borderColor = 'var(--ln-border)';
+                    el.style.color = 'var(--ln-sub)';
+                    el.style.background = 'rgba(255,255,255,0.03)';
+                  }}
+                >
+                  {s.icon}
+                </a>
+              ))}
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center p-8 bg-slate-900/50 border border-slate-700/50 rounded-2xl space-y-6 text-center">
-            <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mb-2">
-              <FileText size={40} className="text-accent" />
+          {/* Right — Resume card */}
+          <div
+            style={{
+              background: 'var(--ln-bg)',
+              border: '1px solid var(--ln-border)',
+              borderRadius: 'var(--ln-radius-xl)',
+              padding: 32,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+              gap: 20,
+            }}
+          >
+            <div
+              style={{
+                width: 64,
+                height: 64,
+                borderRadius: 16,
+                background: 'var(--ln-accent-dim)',
+                border: '1px solid rgba(94,106,210,0.2)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <FileText size={28} style={{ color: 'var(--ln-accent)' }} />
             </div>
-            <div className="space-y-2">
-              <h3 className="text-2xl font-bold text-white">Full Resume</h3>
-              <p className="text-slate-400 text-sm">
-                경력 사항과 상세 기술 역량이 포함된 <br /> PDF 이력서를 확인해 보세요.
+            <div>
+              <h3
+                style={{
+                  fontSize: 18,
+                  fontWeight: 700,
+                  letterSpacing: '-0.03em',
+                  color: 'var(--ln-text)',
+                }}
+              >
+                Full Resume
+              </h3>
+              <p style={{ fontSize: 13, color: 'var(--ln-sub)', marginTop: 6, lineHeight: 1.6 }}>
+                경력 사항과 상세 기술 역량이 포함된 PDF 이력서를 확인해 보세요.
               </p>
             </div>
-            <a 
+            <a
               href={CONTACT_INFO.resumeUrl}
-              className="w-full py-4 bg-accent hover:bg-teal-400 text-slate-900 font-bold rounded-xl flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-accent/20"
+              className="ln-btn-primary"
+              style={{ width: '100%', justifyContent: 'center', padding: '12px 24px' }}
             >
-              Download CV <Send size={18} />
+              Download CV <Download size={15} />
             </a>
-            <p className="text-[10px] text-slate-600 uppercase font-bold tracking-[0.2em]">
+            <p
+              style={{
+                fontSize: 10,
+                color: 'var(--ln-muted)',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                fontWeight: 600,
+              }}
+            >
               Updated Oct 2023
             </p>
           </div>

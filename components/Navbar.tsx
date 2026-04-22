@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Globe2 } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -9,35 +8,25 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: 'About', id: 'about' },
-    { name: 'Skills', id: 'skills' },
     { name: 'Projects', id: 'gis-projects' },
-    { name: 'Automation', id: 'automation' },
+    { name: 'Products', id: 'products' },
+    { name: 'Skills', id: 'skills' },
     { name: 'Contact', id: 'contact' },
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
 
-    const observerOptions = {
-      root: null,
-      rootMargin: '-40% 0px -50% 0px',
-      threshold: 0
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { root: null, rootMargin: '-40% 0px -50% 0px', threshold: 0 }
+    );
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    
-    const sections = navLinks.map(link => link.id);
-    sections.forEach(id => {
+    navLinks.forEach(({ id }) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -51,12 +40,9 @@ const Navbar: React.FC = () => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection(id);
-      setIsMobileMenuOpen(false);
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setActiveSection(id);
+    setIsMobileMenuOpen(false);
   };
 
   const scrollToTop = () => {
@@ -65,90 +51,127 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${
-        isScrolled 
-          ? 'py-3 bg-primary/80 backdrop-blur-lg border-b border-slate-700/50 shadow-lg' 
-          : 'py-6 bg-transparent'
-      }`}
+    <nav
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        zIndex: 100,
+        background: isScrolled ? 'rgba(17,17,19,0.85)' : 'transparent',
+        backdropFilter: isScrolled ? 'blur(16px) saturate(180%)' : 'none',
+        borderBottom: isScrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
+        padding: isScrolled ? '12px 0' : '20px 0',
+        transition: 'all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      }}
     >
-      <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
-        {/* Logo */}
-        <button 
-          onClick={scrollToTop}
-          className="flex items-center gap-2 group"
-        >
-          <div className="p-2 bg-accent/20 rounded-lg group-hover:bg-accent/30 transition-colors">
-            <Globe2 className="text-accent" size={20} />
+      <div className="max-w-5xl mx-auto px-6 flex justify-between items-center">
+        <button onClick={scrollToTop} className="flex items-center gap-2 group" aria-label="홈으로 이동">
+          <div
+            style={{
+              width: 28,
+              height: 28,
+              borderRadius: 7,
+              background: 'var(--ln-accent)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 13,
+              fontWeight: 700,
+              color: '#fff',
+              letterSpacing: '-0.03em',
+              transition: 'opacity 150ms',
+            }}
+            className="group-hover:opacity-80"
+          >
+            L
           </div>
-          <span className="text-white font-bold text-lg tracking-tight">
-            LDH.<span className="text-accent">dev</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--ln-text)', letterSpacing: '-0.02em' }}>
+            LDH<span style={{ color: 'var(--ln-muted)' }}>.dev</span>
           </span>
         </button>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
-              <a 
-                key={link.id} 
+              <a
+                key={link.id}
                 href={`#${link.id}`}
                 onClick={(e) => handleNavClick(e, link.id)}
-                className={`text-sm font-medium transition-all relative group ${
-                  isActive ? 'text-accent' : 'text-slate-400 hover:text-white'
-                }`}
+                className="ln-nav-link"
+                data-active={isActive ? 'true' : 'false'}
               >
                 {link.name}
-                <span className={`absolute -bottom-1 left-0 h-[2px] bg-accent transition-all duration-300 ${
-                  isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                }`}></span>
               </a>
             );
           })}
-          <a 
-            href="#contact" 
+          <div style={{ width: 1, height: 16, background: 'var(--ln-border)', margin: '0 8px' }} />
+          <a
+            href="#contact"
             onClick={(e) => handleNavClick(e, 'contact')}
-            className="px-5 py-2 bg-accent/10 border border-accent/50 text-accent text-sm font-bold rounded-full hover:bg-accent hover:text-slate-900 transition-all"
+            className="ln-btn-primary"
+            style={{ padding: '7px 16px', fontSize: 13 }}
           >
             Hire Me
           </a>
         </div>
 
         {/* Mobile Toggle */}
-        <button 
-          className="md:hidden text-slate-300 hover:text-white relative z-[101]"
+        <button
+          className="md:hidden"
+          style={{ color: 'var(--ln-sub)', padding: 4, position: 'relative', zIndex: 101, background: 'none', border: 'none', cursor: 'pointer' }}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? '메뉴 닫기' : '메뉴 열기'}
         >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <div 
-        className={`fixed inset-0 top-0 bg-primary/98 backdrop-blur-xl z-[90] transition-transform duration-500 md:hidden ${
-          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+      {/* Mobile Menu */}
+      <div
+        className="md:hidden"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(17,17,19,0.98)',
+          backdropFilter: 'blur(20px)',
+          zIndex: 90,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 8,
+          transform: isMobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
+          transition: 'transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        }}
       >
-        <div className="flex flex-col items-center justify-center h-full gap-10 p-6">
-          {navLinks.map((link) => (
-            <a 
-              key={link.id} 
-              href={`#${link.id}`}
-              onClick={(e) => handleNavClick(e, link.id)}
-              className={`text-3xl font-bold transition-colors ${
-                activeSection === link.id ? 'text-accent' : 'text-white'
-              }`}
-            >
-              {link.name}
-            </a>
-          ))}
-          <a 
+        {navLinks.map((link) => (
+          <a
+            key={link.id}
+            href={`#${link.id}`}
+            onClick={(e) => handleNavClick(e, link.id)}
+            style={{
+              fontSize: 28,
+              fontWeight: 600,
+              letterSpacing: '-0.03em',
+              color: activeSection === link.id ? 'var(--ln-text)' : 'var(--ln-sub)',
+              textDecoration: 'none',
+              padding: '12px 24px',
+            }}
+          >
+            {link.name}
+          </a>
+        ))}
+        <div style={{ marginTop: 24 }}>
+          <a
             href="#contact"
             onClick={(e) => handleNavClick(e, 'contact')}
-            className="w-full max-w-xs text-center py-4 bg-accent text-slate-900 font-bold rounded-2xl shadow-lg shadow-accent/20"
+            className="ln-btn-primary"
+            style={{ fontSize: 15, padding: '12px 32px' }}
           >
-            Download Resume
+            Hire Me
           </a>
         </div>
       </div>
