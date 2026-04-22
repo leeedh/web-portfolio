@@ -6,11 +6,35 @@ import { PRODUCT_PROJECTS } from '../constants';
 const Products: React.FC = () => {
   return (
     <section id="products" className="scroll-mt-24">
-      <div className="flex items-center gap-4 mb-16 border-b border-slate-700 pb-4">
-        <Rocket className="text-purple-500 w-8 h-8" />
-        <h2 className="text-3xl md:text-4xl font-bold">Real-world Products <span className="text-textMuted text-2xl font-normal ml-2">(Problem Solving)</span></h2>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 12,
+          marginBottom: 48,
+          paddingBottom: 24,
+          borderBottom: '1px solid var(--ln-border)',
+        }}
+      >
+        <span className="ln-section-label" style={{ alignSelf: 'flex-start' }}>
+          <Rocket size={12} />
+          Products
+        </span>
+        <h2
+          style={{
+            fontSize: 'clamp(22px, 3vw, 30px)',
+            fontWeight: 700,
+            letterSpacing: '-0.04em',
+            color: 'var(--ln-text)',
+          }}
+        >
+          Real-world Products
+          <span style={{ fontSize: 16, fontWeight: 400, color: 'var(--ln-muted)', marginLeft: 12 }}>
+            Problem Solving
+          </span>
+        </h2>
       </div>
-      <div className="space-y-12">
+      <div>
         {PRODUCT_PROJECTS.map((project, index) => (
           <ProjectCard key={project.id} project={project} reverse={index % 2 === 0} />
         ))}
@@ -20,4 +44,3 @@ const Products: React.FC = () => {
 };
 
 export default Products;
-

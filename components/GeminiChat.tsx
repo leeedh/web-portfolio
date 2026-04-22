@@ -6,116 +6,266 @@ import { ChatMessage } from '../types';
 const GeminiChat: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: '안녕하세요! 저는 이 포트폴리오의 AI 어시스턴트입니다. 지원자의 경험이나 기술 스택에 대해 궁금한 점을 물어보세요.' }
+    { role: 'model', text: '안녕하세요! 저는 이 포트폴리오의 AI 어시스턴트입니다. 지원자의 경험이나 기술 스택에 대해 궁금한 점을 물어보세요.' },
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   useEffect(() => {
-    scrollToBottom();
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isOpen]);
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
-
     const userText = input;
     setInput('');
-    setMessages(prev => [...prev, { role: 'user', text: userText }]);
+    setMessages((prev) => [...prev, { role: 'user', text: userText }]);
     setIsLoading(true);
-
     try {
       const responseText = await generateChatResponse(userText);
-      setMessages(prev => [...prev, { role: 'model', text: responseText }]);
-    } catch (error) {
-      setMessages(prev => [...prev, { role: 'model', text: '오류가 발생했습니다.', isError: true }]);
+      setMessages((prev) => [...prev, { role: 'model', text: responseText }]);
+    } catch {
+      setMessages((prev) => [...prev, { role: 'model', text: '오류가 발생했습니다.', isError: true }]);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div
+      style={{
+        position: 'fixed',
+        bottom: 24,
+        right: 24,
+        zIndex: 50,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+      }}
+    >
       {/* Chat Window */}
       {isOpen && (
-        <div className="mb-4 w-80 md:w-96 bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-fade-in-up" style={{ height: '500px' }}>
+        <div
+          style={{
+            marginBottom: 12,
+            width: 360,
+            height: 500,
+            background: 'var(--ln-surface)',
+            border: '1px solid var(--ln-border-md)',
+            borderRadius: 'var(--ln-radius-xl)',
+            boxShadow: '0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05)',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            animation: 'ln-fade-up 0.2s cubic-bezier(0.25,0.46,0.45,0.94) both',
+          }}
+        >
           {/* Header */}
-          <div className="bg-slate-900 p-4 border-b border-slate-700 flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-accent/20 rounded-full">
-                <Bot size={20} className="text-accent" />
+          <div
+            style={{
+              background: 'var(--ln-bg)',
+              padding: '14px 16px',
+              borderBottom: '1px solid var(--ln-border)',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: 8,
+                  background: 'var(--ln-accent-dim)',
+                  border: '1px solid rgba(94,106,210,0.25)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Bot size={17} style={{ color: 'var(--ln-accent)' }} />
               </div>
               <div>
-                <h3 className="text-white font-semibold text-sm">AI Recruiter Assistant</h3>
-                <p className="text-xs text-slate-400">Powered by Gemini 2.5</p>
+                <h3 style={{ fontSize: 13, fontWeight: 600, color: 'var(--ln-text)' }}>AI Recruiter Assistant</h3>
+                <p style={{ fontSize: 11, color: 'var(--ln-muted)' }}>Powered by Gemini 2.5</p>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white">
-              <X size={20} />
+            <button
+              onClick={() => setIsOpen(false)}
+              aria-label="채팅 닫기"
+              style={{
+                color: 'var(--ln-muted)',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 4,
+                borderRadius: 6,
+                transition: 'color 150ms',
+              }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = 'var(--ln-text)')}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = 'var(--ln-muted)')}
+            >
+              <X size={17} />
             </button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-900/50">
+          <div
+            style={{
+              flex: 1,
+              overflowY: 'auto',
+              padding: 16,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 12,
+              background: 'var(--ln-bg)',
+            }}
+          >
             {messages.map((msg, idx) => (
-              <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div 
-                  className={`max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed ${
-                    msg.role === 'user' 
-                      ? 'bg-accent text-slate-900 rounded-tr-none' 
-                      : 'bg-slate-700 text-slate-100 rounded-tl-none border border-slate-600'
-                  }`}
+              <div
+                key={idx}
+                style={{ display: 'flex', justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' }}
+              >
+                <div
+                  style={{
+                    maxWidth: '80%',
+                    padding: '10px 14px',
+                    borderRadius: msg.role === 'user' ? '12px 12px 4px 12px' : '12px 12px 12px 4px',
+                    fontSize: 13,
+                    lineHeight: 1.6,
+                    ...(msg.role === 'user'
+                      ? { background: 'var(--ln-accent)', color: '#fff', border: 'none' }
+                      : {
+                          background: 'var(--ln-surface)',
+                          color: 'var(--ln-text)',
+                          border: '1px solid var(--ln-border)',
+                        }),
+                  }}
                 >
                   {msg.text}
                 </div>
               </div>
             ))}
             {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-slate-700 p-3 rounded-2xl rounded-tl-none border border-slate-600 flex items-center gap-2">
-                  <Loader2 size={16} className="animate-spin text-accent" />
-                  <span className="text-xs text-slate-400">AI is thinking...</span>
+              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <div
+                  style={{
+                    padding: '10px 14px',
+                    background: 'var(--ln-surface)',
+                    border: '1px solid var(--ln-border)',
+                    borderRadius: '12px 12px 12px 4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                  }}
+                >
+                  <Loader2
+                    size={14}
+                    style={{ color: 'var(--ln-accent)', animation: 'spin 1s linear infinite' }}
+                  />
+                  <span style={{ fontSize: 12, color: 'var(--ln-muted)' }}>Thinking...</span>
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Area */}
-          <div className="p-3 bg-slate-900 border-t border-slate-700">
-            <form 
-              onSubmit={(e) => { e.preventDefault(); handleSend(); }}
-              className="flex gap-2"
+          {/* Input */}
+          <div
+            style={{
+              padding: '12px',
+              background: 'var(--ln-surface)',
+              borderTop: '1px solid var(--ln-border)',
+            }}
+          >
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSend();
+              }}
+              style={{ display: 'flex', gap: 8 }}
             >
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about my Python skills..."
-                className="flex-1 bg-slate-800 border border-slate-600 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-accent"
+                placeholder="Ask about my experience..."
+                style={{
+                  flex: 1,
+                  background: 'var(--ln-bg)',
+                  border: '1px solid var(--ln-border)',
+                  borderRadius: 8,
+                  padding: '8px 12px',
+                  fontSize: 13,
+                  color: 'var(--ln-text)',
+                  outline: 'none',
+                  transition: 'border-color 150ms',
+                }}
+                onFocus={(e) =>
+                  ((e.currentTarget as HTMLElement).style.borderColor = 'var(--ln-accent)')
+                }
+                onBlur={(e) =>
+                  ((e.currentTarget as HTMLElement).style.borderColor = 'var(--ln-border)')
+                }
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={isLoading || !input.trim()}
-                className="bg-accent hover:bg-accent/90 text-slate-900 p-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 8,
+                  background: 'var(--ln-accent)',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#fff',
+                  opacity: isLoading || !input.trim() ? 0.4 : 1,
+                  transition: 'opacity 150ms',
+                  flexShrink: 0,
+                }}
               >
-                <Send size={18} />
+                <Send size={15} />
               </button>
             </form>
           </div>
         </div>
       )}
 
-      {/* Toggle Button */}
+      {/* FAB */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 bg-accent hover:bg-teal-400 text-slate-900 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+        aria-label={isOpen ? '채팅 닫기' : '채팅 열기'}
+        style={{
+          width: 48,
+          height: 48,
+          borderRadius: 12,
+          background: isOpen ? 'var(--ln-surface2)' : 'var(--ln-accent)',
+          border: '1px solid var(--ln-border-md)',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#fff',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+          transition: 'all 150ms cubic-bezier(0.25,0.46,0.45,0.94)',
+        }}
+        onMouseEnter={(e) => {
+          const el = e.currentTarget as HTMLElement;
+          el.style.transform = 'translateY(-2px)';
+          el.style.boxShadow = '0 12px 32px rgba(0,0,0,0.5)';
+        }}
+        onMouseLeave={(e) => {
+          const el = e.currentTarget as HTMLElement;
+          el.style.transform = 'translateY(0)';
+          el.style.boxShadow = '0 8px 24px rgba(0,0,0,0.4)';
+        }}
       >
-        {isOpen ? <X size={28} /> : <MessageSquare size={28} />}
+        {isOpen ? <X size={20} /> : <MessageSquare size={20} />}
       </button>
     </div>
   );
